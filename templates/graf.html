@@ -1,0 +1,89 @@
+{% extends "main.html" %}
+{% block content %}
+<form method=post action="">
+<table>
+  {% for field in form %}
+    <tr>
+    <td class="name"></td><td>{{ field(size=12) }}</td>
+    <td>{{ field.label }}</td>
+    {% if field.errors %}
+      <td><ul class=errors>
+      {% for error in field.errors %}
+        <li><font color="red">{{ error }}</font></li>
+      {% endfor %}</ul></td>
+    {% endif %}
+    </tr>
+  {% endfor %}
+</table>
+<p><input type=submit value=Vis></form></p>
+
+{% if result != None %}
+
+            <div id={{ chart1ID|safe }} class="chart" style="height: 100px; width: 500px"></div>
+                <script>
+                    var chart1_id = {{ chart1ID|safe }}
+                    var series1 = {{ series1|safe }}
+                    var title1 = {{ title1|safe }}
+                    var xAxis1 = {{ xAxis1|safe }}
+                    var yAxis1 = {{ yAxis1|safe }}
+                    var chart1 = {{ chart1|safe }}
+                </script>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+        <div id={{ chart2ID|safe }} class="chart" style="height: 100px; width: 500px"></div>
+                <script>
+                    var chart2_id = {{ chart2ID|safe }}
+                    var series2 = {{ series2|safe }}
+                    var title2 = {{ title2|safe }}
+                    var xAxis2 = {{ xAxis2|safe }}
+                    var yAxis2 = {{ yAxis2|safe }}
+                    var chart2 = {{ chart2|safe }}
+                </script>
+
+<script src="../static/jquery.min.js"></script>
+<script src="../static/highcharts.js"></script>
+<script src="../static/graph.js"></script>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+    {{ js_resources|indent(4)|safe }}
+    {{ css_resources|indent(4)|safe }}
+    {{ plot_script|indent(4)|safe }}
+
+  {{ plot_div|indent(4)|safe }}
+
+{% endif %}
+
+{% endblock %}
