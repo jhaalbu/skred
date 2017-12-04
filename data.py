@@ -1,20 +1,13 @@
 import pandas as pd
-import matplotlib as plt
-import numpy as np
 import requests
 
 def hentData(vegref):
 
     api = 'https://www.vegvesen.no/nvdb/api/v2/'
-    headers =   { 'accept' : 'application/vnd.vegvesen.nvdb-v2+json', 'X-Client' : 'nvdbskred.py','X-Kontaktperson' : 'jan.aalbu@vegvesen.no'}
-
-    #vegref = 'fv241'
-
-
-    objType = 445 #Skred
-    url = api + 'vegobjekter/' + str(objType)
+    headers =   { 'accept' : 'application/vnd.vegvesen.nvdb-v2+json', 'X-Client' : 'Skreddata','X-Kontaktperson' : 'jan.aalbu@vegvesen.no'}
+    url = api + 'vegobjekter/445?antall=100000' #445 er skred objekttype
     filtre = {'vegreferanse': vegref, 'segmentering' : 'false', 'srid' : 4326}
-    rstat = requests.get(url + '/statistikk', headers=headers, params=filtre)
+    rstat = requests.get(api + 'vegobjekter/445/statistikk', headers=headers, params=filtre)
     skredstat = rstat.json()
     filtre['inkluder'] = 'egenskaper,lokasjon'
     r = requests.get(url, headers=headers, params=filtre)
@@ -79,7 +72,11 @@ def hentData(vegref):
                 stenging = 'Ingen data'
             else:
                 stenging = next((item for item in ettskred['egenskaper'] if item['id'] == 2344), None)['verdi']
-
+            if next((item for item in ettskred['egenskaper'] if item['id'] == 2327), None) == None:
+                volum = 'Ingen data'
+            else:
+                volum = next((item for item in ettskred['egenskaper'] if item['id'] == 2327), None)['verdi']
+            
             vegreferanse = ettskred['lokasjon']['vegreferanser'][0]['kortform']
             geometri = ettskred['lokasjon']['geometri']['wkt']
 
@@ -95,7 +92,8 @@ def hentData(vegref):
                          'Blokkert veglengde' : blokkert_veglengde,
                          'Stenging' : stenging,
                          'Vegreferanse' : vegreferanse,
-                         'Geometri' : geometri}
+                         'Geometri' : geometri,
+                         'Volum' : volum}
             liste.append(skreddict)
 
     df = pd.DataFrame(liste)

@@ -47,7 +47,13 @@
 			<p><input type=submit value=Vis></form></p>
         <br>
         Data henta frå Statens Vegvesen Nasjonal Vegdatabank (NVDB)
-        Viser førebels berre 1000 skred om gangen
+        <br>
+        <br>
+        {% if viseside == True %}
+
+		    {{ plot_div_skredtype|indent(4)|safe }}
+            {{ plot_script_skredtype|indent(4)|safe }}
+		{% endif %}
 
     </div>
     <div class="col-8">
@@ -58,10 +64,14 @@
 
 
         {% if viseside == True %}
-        Data for {{ vegref }}
-		    {{ plot_div|indent(4)|safe }}
-            {{ plot_script|indent(4)|safe }}
+
+		    {{ plot_div_oversikt|indent(4)|safe }}
+            {{ plot_script_oversikt|indent(4)|safe }}
 		{% endif %}
+    </div>
+        <div class="col-8">
+
+
     </div>
   </div>
 </div>
