@@ -32,6 +32,8 @@ def plot_steinmaaned(df, vegref):
     p.vbar(x='x', top='y', width=0.9, source=source)
     p.xaxis.major_label_orientation = 1.2
     p.xgrid.grid_line_color = None
+    p.yaxis.axis_label = "Antall skred"
+    p.xaxis.axis_label = "Måned"
     p.y_range.start = 0
     p.add_layout(labels)
     #p.add_tools(HoverTool(tooltips=[("Antall", '@y')]))
@@ -62,6 +64,8 @@ def plot_snomaaned(df, vegref):
     p.vbar(x='x', top='y', width=0.9, source=source)
     p.xaxis.major_label_orientation = 1.2
     p.xgrid.grid_line_color = None
+    p.yaxis.axis_label = "Antall skred"
+    p.xaxis.axis_label = "Måned"
     p.y_range.start = 0
     p.add_layout(labels)
     p.add_tools(HoverTool(tooltips=[("Antall", '@y')]))
@@ -92,6 +96,8 @@ def plot_maaned(df, vegref):
     p.vbar(x='x', top='y', width=0.9, source=source)
     p.xaxis.major_label_orientation = 1.2
     p.xgrid.grid_line_color = None
+    p.yaxis.axis_label = "Antall skred"
+    p.xaxis.axis_label = "Maaned"
     p.y_range.start = 0
     p.add_layout(labels)
     p.add_tools(HoverTool(tooltips=[("Antall", '@y')]))
@@ -129,7 +135,7 @@ def plot_aar(df, vegref):
     p.y_range.start = 0
     p.xgrid.grid_line_color = None
     p.yaxis.axis_label = "Antall skred"
-    p.xaxis.axis_label = "Type skred"
+    p.xaxis.axis_label = "Årstall"
     p.xaxis.major_label_orientation = 1.2
     p.outline_line_color = None
 
